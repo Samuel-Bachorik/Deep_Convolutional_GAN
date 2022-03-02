@@ -4,10 +4,10 @@ import torch.nn as nn
 class Generator(nn.Module):
     def __init__(self,channels_noise, channels_img):
         super(Generator, self).__init__()
-        #Set device
+        # Set device
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-        #Model layers
+        # Model layers
         self.layers_generator = [
 
             self.transposed_conv_bn_act(channels_noise, 1024, (4, 4), (1, 1), (0, 0)),
@@ -17,11 +17,11 @@ class Generator(nn.Module):
             self.transposed_conv_bn_act(256, 128, (4, 4), (2, 2), (1, 1))
         ]
 
-        #Out layer with Tanh activation for better stability
+        # Out layer with Tanh activation for better stability
         self.out_conv = nn.ConvTranspose2d(128, channels_img, kernel_size=(4,4), stride=(2,2), padding=(1,1))
         self.act = nn.Tanh()
 
-        #Automatic weight init
+        # Automatic weight init
         for i in range(len(self.layers_generator)):
             torch.nn.init.xavier_uniform_(self.layers_generator[i][0].weight)
             torch.nn.init.zeros_(self.layers_generator[i][0].bias)
@@ -30,7 +30,7 @@ class Generator(nn.Module):
         self.model_generator = nn.Sequential(*self.layers_generator)
         self.model_generator.to(self.device)
 
-    #Forward propagation
+    # Forward propagation
     def forward(self, x):
 
         x = self.model_generator(x)
@@ -73,11 +73,11 @@ class Discriminator(torch.nn.Module):
             torch.nn.init.xavier_uniform_(self.layers_discriminator[i][0].weight)
             torch.nn.init.zeros_(self.layers_discriminator[i][0].bias)
 
-        #Create network and put on device
+        # Create network and put on device
         self.model_discriminator = nn.Sequential(*self.layers_discriminator)
         self.model_discriminator.to(self.device)
 
-    #Forward propagation
+    # Forward propagation
     def forward(self, x):
 
         x = self.model_discriminator(x)
