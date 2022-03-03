@@ -8,6 +8,7 @@ Custom model trained with custom data loader <br/>
    -  Discriminator with 6x Conv2d, batchnorm, Leaky ReLu activation with 0.2 negative_slope
    -  Xavier weight init
    -  Zero bias init
+   -  Trained on NVIDIA RTX 3060
 
 
 # Loss function
