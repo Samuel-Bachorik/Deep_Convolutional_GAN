@@ -1,4 +1,4 @@
-# MNIST_Deep-Convolutional_GAN
+# Deep convolutional Generative Adversarial Network
 Neural network generating hand written numbers <br/>
 
 Custom model trained with custom data loader <br/>
