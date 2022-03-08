@@ -6,7 +6,7 @@ Custom model trained with custom data loader <br/>
    -  Fully convolutional, no Linear (Fully contected) layers
    -  Generator with 6x TransposeConv, batchnorm, ReLu activation
    -  Discriminator with 6x Conv2d, batchnorm, Leaky ReLu activation with 0.2 negative_slope
-   -  Xavier weight init
+   -  Orthogonal weight init with 0.1 gain
    -  Zero bias init
    -  Trained on NVIDIA RTX 3060
 
